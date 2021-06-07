@@ -1,0 +1,46 @@
+.paddings {
+    padding: 16px;
+    padding-bottom: 5px;
+}
+.dx-button.dx-button-success {
+    width: 10%;
+}
+.search-btn {
+    text-align : right;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.search-btn .dx-button-text {
+    font-size: 15px;
+}
+
+.dx-button-has-icon.dx-button-has-text .dx-icon {
+    width: 20px;
+    font-size: 25px;
+}
+
+.dx-accordion-item-body {
+    overflow: hidden;
+    padding: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 12px;
+}
+
+.dx-accordion-item-opened > .dx-accordion-item-title {
+    height: 30px;
+}
+
+.dx-field-item-label-location-top {
+    display: block;
+    padding: 5px 0 3px;
+}
+
+.dateBetween {
+    display: flex;
+}
+
+.dateBetween .gubun {
+    margin : 10px;
+    font-size: 15px;
+}
