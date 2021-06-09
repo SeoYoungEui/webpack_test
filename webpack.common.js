@@ -3,14 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin') //서버를 띄울 때�
 const Dotenv = require('dotenv-webpack') //.env 파일로 간단하게 노드의 환경 변수를 설정
 
 module.exports = {
-  entry: ['@babel/polyfill', './src/index.js'], // 번들 작업할 파일
+  // 번들 작업할 파일
+  entry: ['@babel/polyfill', './src/index.js', './src/styles/sass/main.scss'],
   // 컴파일 + 번들링된 js 파일이 저장될 경로와 이름 지정
   output: {
     filename: '[name].bundle.js', //  [name]은 entry에서 설정한 app인 파일이름이 [name]으로 들어가 app.bundle.js로 번들 파일을 생성해준다.
     path: path.resolve(__dirname, 'dist/js'), // 번들화 된 파일 경로
     publicPath: '/' //파일들이 위치할 서버 상의 경로이다.
   },
-
   //확장자를 생략하기 위한 설정
   resolve: {
     modules: ['node_modules'],
@@ -28,7 +28,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$|jsx/,
-        include: [path.resolve(__dirname, 'src/js')],
+        include: [path.resolve(__dirname, './src')],
         exclude: ['/node_modules'], // node_modules 폴더 제외
         use: {
           //로더 이름
@@ -43,20 +43,27 @@ module.exports = {
             ],
             //옵션에 사용할 플러그인
             plugins: [
-              '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-transform-runtime',
-              { corejs: 3 }
+              ['@babel/plugin-proposal-class-properties'],
+              ['@babel/plugin-transform-runtime', { corejs: 3 }]
             ]
           }
-        },
-        exclude: /node_module/
+        }
       },
       {
         test: /\.css$/,
         use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.scss$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader' // compiles Sass to CSS, using Node Sass by default
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|otf)$/,
         use: 'url-loader?name=[name].[ext]'
       }
     ]
